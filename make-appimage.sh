@@ -11,6 +11,7 @@ export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}
 export ICON=/usr/share/icons/hicolor/scalable/apps/org.nickvision.tubeconverter.svg
 export DESKTOP=/usr/share/applications/org.nickvision.tubeconverter.desktop
 export DEPLOY_PYTHON=1
+export STRACE_TIME=3
 
 # Deploy dependencies
 mkdir -p ./AppDir/bin
@@ -18,6 +19,7 @@ cp -r /usr/lib/org.nickvision.tubeconverter/* ./AppDir/bin
 quick-sharun \
 	./AppDir/bin/*        \
 	/usr/bin/bun          \
+	/usr/bin/secret-tool  \
 	/usr/lib/libgtk-4.so* \
 	/usr/lib/libgirepository*.so*
 
