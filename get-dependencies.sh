@@ -6,18 +6,14 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm python-websockets
+pacman -Syu --noconfirm yt-dlp
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini
 
 # Comment this out if you need an AUR package
-# yt-dlp on archlinuxarm is outdated and has no js support
 make-aur-package bun-bin
-export PRE_BUILD_CMDS="sed -i -e 's|deno||g' ./PKGBUILD"
-make-aur-package --archlinux-pkg yt-dlp-ejs
-make-aur-package --archlinux-pkg yt-dlp
 
 # yt-dlp gives a warning that only deno is supported by default
 sed -i -e "s|default=\['deno'\]|default=['bun']|" /usr/lib/python*/site-packages/yt_dlp/options.py
