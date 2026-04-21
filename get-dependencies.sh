@@ -10,10 +10,23 @@ echo "---------------------------------------------------------------"
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
-get-debloated-pkgs --add-common --prefer-nano
+get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini
 
 # Comment this out if you need an AUR package
-#make-aur-package PACKAGENAME
+# yt-dlp on archlinuxarm is outdated and has no js support
+make-aur-package bun-bin
+export PRE_BUILD_CMDS="sed -i -e 's|deno||g' ./PKGBUILD"
+make-aur-package --archlinux-pkg yt-dlp-ejs
+make-aur-package --archlinux-pkg yt-dlp
+
+# yt-dlp gives a warning that only deno is supported by default
+sed -i -e "s|default=\['deno'\]|default=['bun']|" /usr/lib/python*/site-packages/yt_dlp/options.py
+
+# build self contained binary
+export PRE_BUILD_CMDS="sed -i -e 's|SelfContained=false|SelfContained=true|g' ./PKGBUILD"
+make-aur-package parabolic
+pacman -Rdd --noconfirm dotnet-runtime
+
 
 # If the application needs to be manually built that has to be done down here
 
