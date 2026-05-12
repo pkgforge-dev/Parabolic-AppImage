@@ -19,6 +19,7 @@ cp -r /usr/lib/org.nickvision.tubeconverter/* ./AppDir/bin
 quick-sharun \
 	./AppDir/bin/*        \
 	/usr/bin/bun          \
+	/usr/bin/yt-dlp       \
 	/usr/bin/secret-tool  \
 	/usr/lib/libgtk-4.so* \
 	/usr/lib/libgirepository*.so*
