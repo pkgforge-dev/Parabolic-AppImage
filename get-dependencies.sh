@@ -12,11 +12,16 @@ echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano ffmpeg-mini
 
-# Comment this out if you need an AUR package
-make-aur-package bun-bin
+echo "Building quickjs..."
+echo "---------------------------------------------------------------"
+git clone https://github.com/bellard/quickjs ./quickjs && (
+	cd ./quickjs
+	make -s
+	make -s install PREFIX=/usr
+)
 
 # yt-dlp gives a warning that only deno is supported by default
-sed -i -e "s|default=\['deno'\]|default=['bun']|" /usr/lib/python*/site-packages/yt_dlp/options.py
+sed -i -e "s|default=\['deno'\]|default=['quickjs']|" /usr/lib/python*/site-packages/yt_dlp/options.py
 
 # build self contained binary
 export PRE_BUILD_CMDS="sed -i -e 's|SelfContained=false|SelfContained=true|g' ./PKGBUILD"

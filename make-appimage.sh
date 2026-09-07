@@ -17,12 +17,13 @@ export STRACE_TIME=3
 mkdir -p ./AppDir/bin
 cp -r /usr/lib/org.nickvision.tubeconverter/* ./AppDir/bin
 quick-sharun \
-	./AppDir/bin/*        \
-	/usr/bin/bun          \
-	/usr/bin/yt-dlp       \
-	/usr/bin/aria2c       \
-	/usr/bin/secret-tool  \
-	/usr/lib/libgtk-4.so* \
+	./AppDir/bin/*            \
+	/usr/bin/qjs              \
+	/usr/bin/yt-dlp           \
+	/usr/bin/aria2c           \
+	/usr/bin/secret-tool      \
+	/usr/lib/libgtk-4.so*     \
+	/usr/lib/libadwaita-1.so* \
 	/usr/lib/libgirepository*.so*
 
 # Additional changes can be done in between here
