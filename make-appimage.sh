@@ -3,25 +3,21 @@
 set -eu
 
 ARCH=$(uname -m)
-VERSION=$(pacman -Q parabolic | awk '{print $2; exit}') # example command to get version of application here
-export ARCH VERSION
+export ARCH
 export OUTPATH=./dist
 export ADD_HOOKS="self-updater.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
 export ICON=/usr/share/icons/hicolor/scalable/apps/org.nickvision.tubeconverter.svg
-export DESKTOP=/usr/share/applications/org.nickvision.tubeconverter.desktop
+export STARTUPWMCLASS=org.nickvision.tubeconverter
 export DEPLOY_PYTHON=1
 export STRACE_TIME=3
 
 # Deploy dependencies
-mkdir -p ./AppDir/bin
-cp -r /usr/lib/org.nickvision.tubeconverter/* ./AppDir/bin
 quick-sharun \
 	./AppDir/bin/*            \
 	/usr/bin/qjs              \
 	/usr/bin/yt-dlp           \
 	/usr/bin/aria2c           \
-	/usr/bin/secret-tool      \
 	/usr/lib/libgtk-4.so*     \
 	/usr/lib/libadwaita-1.so* \
 	/usr/lib/libgirepository*.so*
