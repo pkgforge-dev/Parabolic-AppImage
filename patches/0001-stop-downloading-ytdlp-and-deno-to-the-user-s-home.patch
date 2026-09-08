@@ -1,0 +1,44 @@
+diff --git a/Nickvision.Parabolic.Shared/Services/DenoExecutableService.cs b/Nickvision.Parabolic.Shared/Services/DenoExecutableService.cs
+index ab3e1d6..059376d 100644
+--- a/Nickvision.Parabolic.Shared/Services/DenoExecutableService.cs
++++ b/Nickvision.Parabolic.Shared/Services/DenoExecutableService.cs
+@@ -18,7 +18,7 @@ public class DenoExecutableService : DependencyExecutableService, IDenoExecutabl
+     {
+         if (OperatingSystem.IsLinux())
+         {
+-            DenoBundledVersion = new AppVersion(Desktop.System.Environment.DeploymentMode == DeploymentMode.Local ? "0.0.0" : "2.8.0");
++            DenoBundledVersion = new AppVersion(Desktop.System.Environment.DeploymentMode == DeploymentMode.Local ? "9999.0.0" : "2.8.0");
+         }
+         else
+         {
+diff --git a/Nickvision.Parabolic.Shared/Services/YtdlpExecutableService.cs b/Nickvision.Parabolic.Shared/Services/YtdlpExecutableService.cs
+index bb7ac62..b6c138b 100644
+--- a/Nickvision.Parabolic.Shared/Services/YtdlpExecutableService.cs
++++ b/Nickvision.Parabolic.Shared/Services/YtdlpExecutableService.cs
+@@ -30,7 +30,7 @@ public class YtdlpExecutableService : DependencyExecutableService, IYtdlpExecuta
+     {
+         if (OperatingSystem.IsLinux())
+         {
+-            YtdlpBundledVersion = new AppVersion(Desktop.System.Environment.DeploymentMode == DeploymentMode.Local ? "0.0.0" : "2026.03.17");
++            YtdlpBundledVersion = new AppVersion(Desktop.System.Environment.DeploymentMode == DeploymentMode.Local ? "9999.0.0" : "2026.03.17");
+         }
+         else
+         {
+@@ -74,8 +74,6 @@ public class YtdlpExecutableService : DependencyExecutableService, IYtdlpExecuta
+             "--no-warnings",
+             "--ffmpeg-location",
+             Desktop.System.Environment.FindDependency("ffmpeg") ?? "ffmpeg",
+-            "--js-runtimes",
+-            $"deno:{_denoExecutableService.ExecutablePath ?? "deno"}",
+             "--paths",
+             $"temp:{UserDirectories.Cache}"
+         };
+@@ -144,8 +142,6 @@ public class YtdlpExecutableService : DependencyExecutableService, IYtdlpExecuta
+             "--no-embed-info-json",
+             "--ffmpeg-location",
+             Desktop.System.Environment.FindDependency("ffmpeg") ?? "ffmpeg",
+-            "--js-runtimes",
+-            $"deno:{_denoExecutableService.ExecutablePath ?? "deno"}",
+             "--paths",
+             downloadOptions.SaveFolder,
+             "--paths",
