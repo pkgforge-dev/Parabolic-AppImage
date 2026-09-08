@@ -40,6 +40,11 @@ git clone https://github.com/NickvisionApps/Parabolic.git ./parabolic && (
 	git checkout "$TAG"
 	echo "$TAG" > ~/version
 
+	# stop parabolic from downloading its own yt-dlp and deno binaries
+	# which won't work on musl systems
+	# https://github.com/pkgforge-dev/Parabolic-AppImage/pull/8#issuecomment-5567582819
+	git apply ../patches/*.patch
+
 	dotnet publish ./Nickvision.Parabolic.GNOME/Nickvision.Parabolic.GNOME.csproj \
 		-c Release                \
 		-r "$farch"               \
